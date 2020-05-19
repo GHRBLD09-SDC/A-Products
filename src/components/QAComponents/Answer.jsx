@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AnswerPhotos from './AnswerPhotos.jsx';
 import moment from 'moment';
 import axios from 'axios';
-const api = 'http://3.134.102.30/qa';
+const api = 'http://52.26.193.201:3000/qa';
 
 const Answer = ({ answer }) => {
     

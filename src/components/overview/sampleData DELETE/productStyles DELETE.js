@@ -1,5 +1,5 @@
 // styles for Product ID = 5
-// response from GET to http://3.134.102.30/products/5/styles
+// response from GET to http://52.26.193.201:3000/products/5/styles
 
 var styles = {
   "product_id": "5",

@@ -109,7 +109,7 @@ class StyleSelector extends React.Component {
       return;
     }
     // post to cart
-    axios.post('http://3.134.102.30/cart', {
+    axios.post('http://52.26.193.201:3000/cart', {
       user_token: this.props.sessionId,
       sku_id: this.state.selectedSku
     })

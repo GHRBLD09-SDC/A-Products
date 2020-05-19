@@ -35,7 +35,7 @@ class App extends React.Component {
     let time = new Date();
     let interactions = {element, widget, time}
     // console.log('interactions: ', interactions)
-    axios.post('http://3.134.102.30/interactions', interactions)
+    axios.post('http://52.26.193.201:3000/interactions', interactions)
       .then(() => {
         // console.log('Interaction data sent')
       })
@@ -60,7 +60,7 @@ class App extends React.Component {
   getProducts() {
     let promises = [];
     for (let i = 1; i< 100; i++) {
-      promises.push(fetch(`http://3.134.102.30/products/list/?page=${i}&count=50`)
+      promises.push(fetch(`http://52.26.193.201:3000/products/list/?page=${i}&count=50`)
         .then(res => res.json())
       );
     }

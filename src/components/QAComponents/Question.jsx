@@ -4,7 +4,7 @@ import axios from 'axios';
 import NewAnswer from './NewAnswer.jsx';
 import _ from 'lodash';
 import $ from 'jquery';
-const api = 'http://3.134.102.30/qa';
+const api = 'http://52.26.193.201:3000/qa';
 
 class Question extends Component {
     constructor(props) {

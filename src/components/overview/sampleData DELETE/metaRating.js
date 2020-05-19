@@ -1,5 +1,5 @@
 // product info for product id=5
-// response of GET request to http://3.134.102.30/reviews/5/meta
+// response of GET request to http://52.26.193.201:3000/reviews/5/meta
 
 var productMetaRating = {
   "product_id": "5",

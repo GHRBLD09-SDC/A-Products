@@ -2,7 +2,7 @@ import React from 'react'
 import ReviewList from './ReviewList.jsx'
 import Ratings from './Ratings.jsx';
 import NewReview from './NewReview.jsx'
-const url = 'http://3.134.102.30/reviews/';
+const url = 'http://52.26.193.201:3000/reviews/';
 
 class Reviews extends React.Component {
   constructor(props) {

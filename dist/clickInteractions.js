@@ -5,7 +5,7 @@ const recordInteractions = (e) => {
   let time = new Date();
   let interactions = {element, widget, time}
   // console.log('interactions: ', interactions)
-  axios.post('http://3.134.102.30/interactions', interactions)
+  axios.post('http://52.26.193.201:3000/interactions', interactions)
   .then(() => {
     // console.log('success')
   })

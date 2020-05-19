@@ -1,5 +1,5 @@
 // page-1 list of products
-// response of GET request to http://3.134.102.30/products/list
+// response of GET request to http://52.26.193.201:3000/products/list
 var productsList = [
   {
       "id": 1,

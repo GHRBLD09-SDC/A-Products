@@ -25,7 +25,7 @@ describe('Question Component', () => {
     //this works sometimes idk
     xit('Sends a PUT request when the \'helpful\' button is clicked', async () => {
         let initialHelpfulness;
-        await axios.get('http://3.134.102.30/qa/5/?page=1?count=4')
+        await axios.get('http://52.26.193.201:3000/qa/5/?page=1?count=4')
             .then(res => {
                 initialHelpfulness = res.data.results[0].question_helpfulness;
                 console.log('initially',initialHelpfulness);
@@ -36,7 +36,7 @@ describe('Question Component', () => {
                 fireEvent.click(helpfulButton);
             })
             .then(setTimeout(() => {
-                axios.get('http://3.134.102.30/qa/5/?page=1?count=4')
+                axios.get('http://52.26.193.201:3000/qa/5/?page=1?count=4')
                 .then(res => {
                     const finalHelpfulness = res.data.results[0].question_helpfulness;
                     console.log(`initial: ${initialHelpfulness}, final: ${finalHelpfulness}`);
@@ -45,7 +45,7 @@ describe('Question Component', () => {
             }), 2000)
 
             // .then(() => {
-            //     return axios.get('http://3.134.102.30/qa/5/?page=1?count=4')})
+            //     return axios.get('http://52.26.193.201:3000/qa/5/?page=1?count=4')})
             // .then(res => {
             //     const finalHelpfulness = res.data.results[0].question_helpfulness;
             //     console.log(`initial: ${initialHelpfulness}, final: ${finalHelpfulness}`);
