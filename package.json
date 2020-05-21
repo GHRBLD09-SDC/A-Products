@@ -11,7 +11,8 @@
     "react-dev": "webpack -d --watch",
     "start": "live-server ./dist",
     "sass-dev": "sass --watch ./dist/sass-files/style.scss ./dist/sass-compiled/compiled.css",
-    "test": "jest spec"
+    "test": "jest spec",
+    "server-dev": "nodemon server/app.js"
   },
   "keywords": [],
   "author": "",
@@ -34,9 +35,13 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.4.0",
-    "jquery": "^3.4.1",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "jquery": "^3.5.1",
+    "knex": "^0.21.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "pg": "^8.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-star-ratings": "^2.3.0",
