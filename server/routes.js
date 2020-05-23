@@ -4,7 +4,7 @@ let queries = [
   "SELECT * FROM products WHERE id=$1",
   "SELECT * FROM styles WHERE product_id=$1",
   "SELECT s.id, ph.thumbnail_url, ph.url FROM photos ph INNER JOIN styles s ON (ph.style_id=s.id) WHERE product_id=$1",
-  "SELECT st.id, sk.skus FROM styles st INNER JOIN skus sk ON (sk.style_id=s.id) WHERE product_id=$1",
+  "SELECT st.id, sk.skus FROM styles st INNER JOIN skus sk ON (sk.style_id=st.id) WHERE product_id=$1",
 ];
 
 const getProduct = (id) => {
