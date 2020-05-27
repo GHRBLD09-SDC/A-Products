@@ -2,3 +2,4 @@ node_modules
 dist/bundle.js
 alex_fec_key.pem
 greenfield.pem
+products_t2_instance.pem

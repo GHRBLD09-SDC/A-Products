@@ -12,7 +12,8 @@
     "start": "live-server ./dist",
     "sass-dev": "sass --watch ./dist/sass-files/style.scss ./dist/sass-compiled/compiled.css",
     "test": "jest spec",
-    "server-dev": "nodemon server/app.js"
+    "server-dev": "nodemon server/app.js",
+    "ssh-ec2": "ssh -i products_t2_instance.pem ec2-user@ec2-18-188-213-50.us-east-2.compute.amazonaws.com"
   },
   "keywords": [],
   "author": "",
