@@ -71,7 +71,7 @@ exports.seed = async function (knex) {
 
   for (let i = 1; i <= desiredFakeProducts; i++) {
     fakeProducts.push(createProduct());
-    if (i % 50000 === 0) {
+    if (i % 5000 === 0) {
       // console.log(fakeProducts);
       await knex("products").insert(fakeProducts);
       fakeProducts = [];
@@ -87,7 +87,7 @@ exports.seed = async function (knex) {
       fakeStyles.push(fakeStyle);
       fakePhotos.push(createPhotos());
       fakeSkus.push({ skus: createSku() });
-      if (i % 50000 === 0) {
+      if (i % 5000 === 0) {
         await knex.batchInsert("styles", fakeStyles, 1000);
         fakeStyles = [];
         await Promise.all([
