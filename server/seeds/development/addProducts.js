@@ -1,5 +1,13 @@
 const faker = require("faker");
 const _ = require("underscore");
+const fs = require("fs");
+const path = require("path");
+const os = require("os");
+const { PerformanceObserver, performance } = require("perf_hooks");
+const productsFile = path.join(__dirname, "products.json");
+const stylesFile = path.join(__dirname, "styles.json");
+const photosFile = path.join(__dirname, "photos.json");
+const skusFile = path.join(__dirname, "skus.json");
 
 const createProduct = () => ({
   name: faker.commerce.productName(),
@@ -63,6 +71,18 @@ const skuOptions = [
 ];
 
 exports.seed = async function (knex) {
+  const wrapped = performance.timerify(generateProducts);
+
+  wrapped();
+
+  const observes = new PerformanceObserver((list) => {
+    console.log(list.getEntries()[0].duration);
+    observes.disconnect();
+  });
+  observes.observe({ entryTypes: ["function"] });
+};
+
+const generateProducts = () => {
   let fakeProducts = [];
   let fakeStyles = [];
   let fakePhotos = [];
@@ -71,9 +91,15 @@ exports.seed = async function (knex) {
 
   for (let i = 1; i <= desiredFakeProducts; i++) {
     fakeProducts.push(createProduct());
-    if (i % 5000 === 0) {
-      // console.log(fakeProducts);
-      await knex("products").insert(fakeProducts);
+
+    if (i % 10000 === 0) {
+      console.log(String((i / desiredFakeProducts) * 100) + "% done");
+      fakeProducts.forEach((product) => {
+        fs.writeFileSync(productsFile, JSON.stringify(product), {
+          flag: "as",
+        });
+      });
+      console.log(String((i / desiredFakeProducts) * 100) + "% done");
       fakeProducts = [];
     }
 
@@ -84,33 +110,65 @@ exports.seed = async function (knex) {
         product_id: i,
       };
       _.extend(fakeStyle, createStyle());
+      // fakeStyles.push(fakeStyle);
       fakeStyles.push(fakeStyle);
       fakePhotos.push(createPhotos());
-      fakeSkus.push({ skus: createSku() });
-      if (i % 5000 === 0) {
-        await knex.batchInsert("styles", fakeStyles, 1000);
+      fakeSkus.push({ sku: createSku() });
+
+      if (i % 10000 === 0) {
+        fakeStyles.forEach((style) => {
+          fs.writeFileSync(stylesFile, JSON.stringify(style), {
+            flag: "as",
+          });
+        });
+        console.log(String((i / desiredFakeProducts) * 100) + "% done");
         fakeStyles = [];
-        await Promise.all([
-          knex.batchInsert("photos", fakePhotos, 1000),
-          knex.batchInsert("skus", fakeSkus, 1000),
-        ]);
+      }
+
+      if (i % 10000 === 0) {
+        fakePhotos.forEach((photo) => {
+          fs.writeFileSync(photosFile, JSON.stringify(photo), {
+            flag: "as",
+          });
+        });
         fakePhotos = [];
-        fakeSkus = [];
         console.log(String((i / desiredFakeProducts) * 100) + "% done");
       }
 
-      // Add fake photos
-
-      // Add fake SKUs
+      if (i % 10000 === 0) {
+        fakeSkus.forEach((sku) => {
+          fs.writeFileSync(skusFile, JSON.stringify(sku), {
+            flag: "as",
+          });
+        });
+        fakeSkus = [];
+        console.log(String((i / desiredFakeProducts) * 100) + "% done");
+      }
+      // fakePhotos.push(createPhotos());
+      // fakeSkus.push({ skus: createSku() });
+      // if (i % 5000 === 0) {
+      //   await knex.batchInsert("styles", fakeStyles, 1000);
+      //   fakeStyles = [];
+      //   await Promise.all([
+      //     knex.batchInsert("photos", fakePhotos, 1000),
+      //     knex.batchInsert("skus", fakeSkus, 1000),
+      //   ]);
+      //   fakePhotos = [];
+      //   fakeSkus = [];
     }
   }
 
-  // console.log(fakeProducts);
-  // console.log(fakeSkus);
+  // Add fake photos
 
-  // return Promise.all([
-  //   knex.batchInsert,
-  //   ("photos", fakePhotos, 10000000),
-  //   knex.batchInsert("skus", fakeSkus, 10000000),
-  // ]).catch((err) => console.log(err));
+  // Add fake SKUs
 };
+
+// console.log(fakeProducts);
+// console.log(fakeSkus);
+
+// return Promise.all([
+//   knex.batchInsert,
+//   ("photos", fakePhotos, 10000000),
+//   knex.batchInsert("skus", fakeSkus, 10000000),
+// ]).catch((err) => console.log(err));
+// };
